@@ -58,6 +58,12 @@ const EthPrice = ({ sourceToken, destinationToken, amount }) => {
     setAmountToReceive(amountReceived);
   };
 
+  const shouldShowEthPrice =
+    sourceToken.toLowerCase() === 'eth' || destinationToken.toLowerCase() === 'eth';
+
+  const shouldShowBnbPrice =
+    sourceToken.toLowerCase() === 'bnb' || destinationToken.toLowerCase() === 'bnb';
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -72,12 +78,16 @@ const EthPrice = ({ sourceToken, destinationToken, amount }) => {
         </p>
       </div>
       <div className="price-info">
-        <p>
-          <strong>Ethereum (ETH) Price:</strong> ${ethPriceUSD ? ethPriceUSD.toFixed(2) : 'N/A'} USD
-        </p>
-        <p>
-          <strong>Binance Coin (BNB) Price:</strong> ${bnbPriceUSD ? bnbPriceUSD.toFixed(2) : 'N/A'} USD
-        </p>
+        {shouldShowEthPrice && (
+          <p>
+            <strong>Ethereum (ETH) Price:</strong> ${ethPriceUSD ? ethPriceUSD.toFixed(2) : 'N/A'} USD
+          </p>
+        )}
+        {shouldShowBnbPrice && (
+          <p>
+            <strong>Binance Coin (BNB) Price:</strong> ${bnbPriceUSD ? bnbPriceUSD.toFixed(2) : 'N/A'} USD
+          </p>
+        )}
       </div>
     </div>
   );
