@@ -7,53 +7,65 @@ function ChainTokenSelector({ onChange }) {
   const [selectedDestinationChain, setSelectedDestinationChain] = useState('');
   const [selectedDestinationToken, setSelectedDestinationToken] = useState('');
 
-  const handleSourceChange = (event) => {
-    const value = event.target.value;
-    if (value) {
-      const [chain, token] = value.split(',');
-      setSelectedSourceChain(chain);
-      setSelectedSourceToken(token);
-      onChange(chain, token, true);
-    } else {
-      setSelectedSourceChain('');
-      setSelectedSourceToken('');
-      onChange('', '', true);
-    }
+  const handleSourceChainChange = (event) => {
+    const chain = event.target.value;
+    setSelectedSourceChain(chain);
+    onChange(chain, selectedSourceToken, true);
   };
 
-  const handleDestinationChange = (event) => {
-    const value = event.target.value;
-    if (value) {
-      const [chain, token] = value.split(',');
-      setSelectedDestinationChain(chain);
-      setSelectedDestinationToken(token);
-      onChange(chain, token, false);
-    } else {
-      setSelectedDestinationChain('');
-      setSelectedDestinationToken('');
-      onChange('', '', false);
-    }
+  const handleSourceTokenChange = (event) => {
+    const token = event.target.value;
+    setSelectedSourceToken(token);
+    onChange(selectedSourceChain, token, true);
+  };
+
+  const handleDestinationChainChange = (event) => {
+    const chain = event.target.value;
+    setSelectedDestinationChain(chain);
+    onChange(chain, selectedDestinationToken, false);
+  };
+
+  const handleDestinationTokenChange = (event) => {
+    const token = event.target.value;
+    setSelectedDestinationToken(token);
+    onChange(selectedDestinationChain, token, false);
   };
 
   return (
     <div className="chain-token-selector">
       <div className="selection-block">
-        <h3>Source Chain & Token</h3>
-        <select value={`${selectedSourceChain},${selectedSourceToken}`} onChange={handleSourceChange}>
-          <option value="">Select Source</option>
-          <option value="Ethereum,ETH">Ethereum - ETH</option>
-          <option value="Binance,BNB">Binance - BNB</option>
-          {/* Add more options as necessary */}
-        </select>
+        <h3>Source</h3>
+        <div className="chain-token-pair">
+          <select value={selectedSourceChain} onChange={handleSourceChainChange}>
+            <option value="">Select Source Chain</option>
+            <option value="Ethereum">Ethereum</option>
+            <option value="Binance">Binance</option>
+            {/* Add more options as necessary */}
+          </select>
+          <select value={selectedSourceToken} onChange={handleSourceTokenChange}>
+            <option value="">Select Source Token</option>
+            <option value="ETH">ETH</option>
+            <option value="BNB">BNB</option>
+            {/* Add more options as necessary */}
+          </select>
+        </div>
       </div>
       <div className="selection-block">
-        <h3>Destination Chain & Token</h3>
-        <select value={`${selectedDestinationChain},${selectedDestinationToken}`} onChange={handleDestinationChange}>
-          <option value="">Select Destination</option>
-          <option value="Ethereum,ETH">Ethereum - ETH</option>
-          <option value="Binance,BNB">Binance - BNB</option>
-          {/* Add more options as necessary */}
-        </select>
+        <h3>Destination</h3>
+        <div className="chain-token-pair">
+          <select value={selectedDestinationChain} onChange={handleDestinationChainChange}>
+            <option value="">Select Destination Chain</option>
+            <option value="Ethereum">Ethereum</option>
+            <option value="Binance">Binance</option>
+            {/* Add more options as necessary */}
+          </select>
+          <select value={selectedDestinationToken} onChange={handleDestinationTokenChange}>
+            <option value="">Select Destination Token</option>
+            <option value="ETH">ETH</option>
+            <option value="BNB">BNB</option>
+            {/* Add more options as necessary */}
+          </select>
+        </div>
       </div>
     </div>
   );
