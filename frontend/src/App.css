@@ -194,3 +194,31 @@
   padding-bottom: 20px;
   border-bottom: 1px solid #444;
 }
+
+.submit-btn {
+  background: linear-gradient(135deg, #e52e71, #ff7f50);
+  color: #ffffff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #d22b66, #e06743);
+  transform: scale(1.05);
+}
+
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; /* Ensure it's on top of everything */
+  pointer-events: none; /* Allow clicks through the confetti */
+}

@@ -36,7 +36,7 @@ function SwapInterface({ sourceChain, sourceToken, destinationChain, destination
       <h2>Swap Interface</h2>
       <div className="swap-section">
         <div className="swap-block">
-          <h3>You Send</h3>
+          <h3>Send</h3>
           <div>{sourceChain} - {sourceToken}</div>
           <input 
             type="number" 
