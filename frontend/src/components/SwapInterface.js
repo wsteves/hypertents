@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
+import Confetti from 'react-confetti';
 import '../App.css';
 import EthPrice from './EthPrice';
+
+Modal.setAppElement('#root'); // Bind modal to your app root element for accessibility
 
 function SwapInterface({ sourceChain, sourceToken, destinationChain, destinationToken }) {
   const [amount, setAmount] = useState(0);
   const [recipient, setRecipient] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleSwap = (swapInfoJson) => {
     console.log('Swap Information:', swapInfoJson);
@@ -17,6 +22,13 @@ function SwapInterface({ sourceChain, sourceToken, destinationChain, destination
     // Reset the parameters
     setAmount(0);
     setRecipient('');
+
+    // Show the modal with confetti
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -31,6 +43,7 @@ function SwapInterface({ sourceChain, sourceToken, destinationChain, destination
             value={amount} 
             onChange={(e) => setAmount(e.target.value)} 
             placeholder="Amount" 
+            className="input-field"
           />
         </div>
         <div className="swap-block">
@@ -50,6 +63,7 @@ function SwapInterface({ sourceChain, sourceToken, destinationChain, destination
           value={recipient} 
           onChange={(e) => setRecipient(e.target.value)} 
           placeholder="Recipient Address" 
+          className="input-field"
         />
         <button 
           className="submit-btn" 
@@ -58,6 +72,20 @@ function SwapInterface({ sourceChain, sourceToken, destinationChain, destination
           Submit
         </button>
       </div>
+
+      {/* Modal for showing "Intent Submitted!" with confetti */}
+      <Modal
+        isOpen={showModal}
+        onRequestClose={closeModal}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <Confetti />
+        <div className="modal-content">
+          <h2>Intent Submitted!</h2>
+          <button onClick={closeModal} className="modal-close-btn">Close</button>
+        </div>
+      </Modal>
     </div>
   );
 }
